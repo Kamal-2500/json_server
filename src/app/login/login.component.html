@@ -1,0 +1,34 @@
+<div class="card-body">
+    <h5 class="card-header">Login</h5>
+    <form name="form" #form="ngForm" (ngSubmit)="form.form.valid && onLogin(form)" form class="row g-3" novalidate>
+
+        <div class="mb-2 row" style="padding-top: 25px;">
+            <label for="no" class="col-sm-2 col-form-label">Username: </label>
+            <div class="col-sm-5">
+                <input type="text" name="username" class="form-control" id="username" ngModel [(ngModel)]="login.username"
+                    [ngClass]="{'is-invalid': usernameHtml.invalid && (usernameHtml.dirty || usernameHtml.touched || form.submitted)}"
+                    #usernameHtml="ngModel" required>
+                <div *ngIf="usernameHtml.invalid && (usernameHtml.dirty || usernameHtml.touched || form.submitted)" style="color: red;">
+                    Username is required.
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-2 row" style="padding-top: 25px;">
+            <label for="date" class="col-sm-2 col-form-label">Password: </label>
+            <div class="col-sm-5">
+                <input type="password" name="password" id="password" class="form-control" ngModel [(ngModel)]="login.password"
+                    [ngClass]="{'is-invalid': passwordHtml.invalid && (passwordHtml.dirty || passwordHtml.touched || form.submitted)}"
+                    #passwordHtml="ngModel" required>
+                <div *ngIf="passwordHtml.invalid && (passwordHtml.dirty || passwordHtml.touched || form.submitted)" style="color: red;">
+                    Password is required.  
+                </div>
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 col-1" style="margin-left: 5px;">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+
+    </form>
+</div>

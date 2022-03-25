@@ -1,0 +1,212 @@
+<div>
+  <div>
+    <!-- appbar -->
+    <kendo-appbar position="top" positionMode="sticky">
+      <kendo-appbar-section>
+        <button kendoButton fillMode="flat">
+          <kendo-icon name="menu"></kendo-icon>
+        </button>
+      </kendo-appbar-section>
+      <kendo-appbar-section>
+        <h3>Kendo UI</h3>
+      </kendo-appbar-section>
+      <kendo-appbar-section>
+        <ul style=" display: flex; list-style-type: none; padding-left: 1500px;">
+          <li routerLink="/login"><span>Login</span></li>
+          <li routerLink="/voucher"><span>Voucher</span></li>
+          <li routerLink="/securepay-payments"><span>Secure Pay</span></li>
+        </ul>
+      </kendo-appbar-section>
+    </kendo-appbar>
+
+    <!-- DropDown -->
+    <p>
+      <kendo-dropdownlist [data]="dropDownItems" textField="text" valueField="value" [defaultItem]="defaultItem"
+        (valueChange)="handleFilterChange($event)" style="margin-top: 10px;">
+      </kendo-dropdownlist>
+    </p>
+
+    <!-- grid -->
+    <kendo-grid [data]="gridItems | async" [pageSize]="pageSize" [skip]="skip" [pageable]="true"
+      (pageChange)="pageChange($event)" [sortable]="true" [sort]="sortDescriptor"
+      (sortChange)="handleSortChange($event)" [height]="350">
+      <kendo-grid-column field="ProductID" title="ID" [width]="50">
+      </kendo-grid-column>
+      <kendo-grid-column field="ProductName" title="Product Name">
+      </kendo-grid-column>
+      <kendo-grid-column field="Category.CategoryName" title="Category">
+      </kendo-grid-column>
+      <kendo-grid-column field="UnitPrice" title="Unit Price" [width]="140" format="{0:c}">
+      </kendo-grid-column>
+      <kendo-grid-column field="Discontinued" [width]="140" filter="boolean">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <input type="checkbox" [checked]="dataItem.Discontinued" disabled />
+        </ng-template>
+      </kendo-grid-column>
+    </kendo-grid>
+    <hr>
+
+    <!-- DatePicker -->
+    <p>
+      Only values between {{ min | date: "dd/MM/yyyy" }} and
+      {{ max | date: "dd/MM/yyyy" }} are valid
+    </p>
+    <div class="col-sm-5">
+      Selected value is: {{ value | date : "MM/dd/yyyy" }} <div *ngIf="model.errors">Errors: {{model.errors | json}}
+      </div>
+    </div>
+    <div class="example-wrapper" style="width: 200px;">
+      <kendo-datepicker [min]="min" [max]="max" #model="ngModel" [(ngModel)]="todayDate" rounded="full"
+        [incompleteDateValidation]="true" calendarType="infinite" [(value)]="value" [disabledDates]="disabledDates">
+      </kendo-datepicker>
+    </div>
+    <hr>
+
+    <!-- text input and popup -->
+    <div style="height: 65px; overflow-y: auto;">
+      <kendo-textbox [style.width.px]="350" placeholder="Search event" [clearButton]="true">
+        <ng-template kendoTextBoxPrefixTemplate>
+          <button kendoButton icon="menu"></button>
+          <kendo-textbox-separator></kendo-textbox-separator>
+          <button kendoButton icon="calendar"></button>
+          <kendo-textbox-separator></kendo-textbox-separator>
+        </ng-template>
+
+        <ng-template kendoTextBoxSuffixTemplate>
+          <kendo-textbox-separator></kendo-textbox-separator>
+          <button kendoButton icon="menu" #abc (click)="popup()"></button>
+          <kendo-popup [anchor]="$any(abc)" [hidden]="!show" [animate]="animate" #pop>
+            <h3 style="margin: 30px;">!!!</h3>
+          </kendo-popup>
+          <button kendoButton icon="calendar"></button>
+        </ng-template>
+      </kendo-textbox><br>
+
+      <kendo-textbox [style.width.px]="350" placeholder="Search event" [clearButton]="true">
+        <ng-template kendoTextBoxPrefixTemplate>
+          <button kendoButton icon="menu"></button>
+          <kendo-textbox-separator></kendo-textbox-separator>
+          <button kendoButton icon="calendar"></button>
+          <kendo-textbox-separator></kendo-textbox-separator>
+        </ng-template>
+
+        <ng-template kendoTextBoxSuffixTemplate>
+          <kendo-textbox-separator></kendo-textbox-separator>
+          <button kendoButton icon="menu" #abc (click)="popup()"></button>
+          <button kendoButton icon="calendar"></button>
+        </ng-template>
+      </kendo-textbox><br>
+
+      <kendo-textbox [style.width.px]="350" placeholder="Search event" [clearButton]="true">
+        <ng-template kendoTextBoxPrefixTemplate>
+          <button kendoButton icon="menu"></button>
+          <kendo-textbox-separator></kendo-textbox-separator>
+          <button kendoButton icon="calendar"></button>
+          <kendo-textbox-separator></kendo-textbox-separator>
+        </ng-template>
+
+        <ng-template kendoTextBoxSuffixTemplate>
+          <kendo-textbox-separator></kendo-textbox-separator>
+          <button kendoButton icon="menu" #abc (click)="popup()"></button>
+          <button kendoButton icon="calendar"></button>
+        </ng-template>
+      </kendo-textbox><br>
+
+      <kendo-textbox [style.width.px]="350" placeholder="Search event" [clearButton]="true">
+        <ng-template kendoTextBoxPrefixTemplate>
+          <button kendoButton icon="menu"></button>
+          <kendo-textbox-separator></kendo-textbox-separator>
+          <button kendoButton icon="calendar"></button>
+          <kendo-textbox-separator></kendo-textbox-separator>
+        </ng-template>
+
+        <ng-template kendoTextBoxSuffixTemplate>
+          <kendo-textbox-separator></kendo-textbox-separator>
+          <button kendoButton icon="menu" #abc (click)="popup()"></button>
+          <button kendoButton icon="calendar"></button>
+        </ng-template>
+      </kendo-textbox><br>
+    </div>
+    {{show}}
+  </div>
+  <hr>
+
+  <!-- dropdown  -->
+  <div style="width: 150px;">
+    <kendo-autocomplete [data]="listItems" placeholder="Your favorite sport" value="Cricket">
+    </kendo-autocomplete>
+  </div>
+  <hr>
+
+  <!-- window and dialog -->
+  <button kendoButton *ngIf="!dialogOpened && !windowOpened" (click)="open('dialog')"> Dialog </button>&nbsp;
+  <button kendoButton *ngIf="!dialogOpened && !windowOpened" (click)="open('window')"> Window </button>
+
+  <kendo-window [minWidth]="200" [minHeight]="125" title="About" *ngIf="windowOpened" (close)="close('window')">
+    <kendo-window-messages minimizeTitle="minimize" maximizeTitle="maximize" closeTitle="close">
+    </kendo-window-messages>
+    <p style="text-align: center; font-weight: bold;">!!!</p>
+  </kendo-window>
+
+  <kendo-dialog title="Delete" *ngIf="dialogOpened" (close)="close('dialog')" [width]="450" autoFocusedElement="#no">
+    <kendo-dialog-messages closeTitle="close"></kendo-dialog-messages>
+    <p style=" text-align: center;">Are you sure?</p>
+    <kendo-dialog-actions>
+      <button kendoButton id="no" (click)="action('no')">No</button>
+      <button kendoButton id="yes" (click)="action('yes')" themeColor="primary">Yes</button>
+    </kendo-dialog-actions>
+  </kendo-dialog>
+  <hr>
+
+  <!-- file saver -->
+  <kendo-textbox id="name" [style.width.px]="350" [clearButton]="true" placeholder="Enter your name" [(ngModel)]="name">
+  </kendo-textbox>
+  <button kendoButton id="yes" (click)="download(name)">Download</button>
+  <hr>
+
+  <!-- sortable -->
+  <kendo-sortable [kendoSortableBinding]="sortable" [animation]="true" class="row" itemClass="item col-sm-3">
+  </kendo-sortable>
+  <hr>
+
+  <!-- option menu and context menu -->
+  <div #target>
+    <p>Right-click to open Context menu</p>
+  </div>
+  <kendo-contextmenu [items]="items" [target]="target"></kendo-contextmenu>
+  <kendo-menu [items]="items" [vertical]="true" style="display:inline-block;"></kendo-menu><br><br>
+
+  <kendo-menu [hoverDelay]="500" [openOnClick]="{ toggle: 'leave' }">
+    <kendo-menu-item text="item1" icon="folder">
+      <kendo-menu-item text="item1.1" icon="folder" [disabled]="true"></kendo-menu-item>
+      <kendo-menu-item text="item1.2" icon="folder"></kendo-menu-item>
+    </kendo-menu-item>
+  </kendo-menu>
+
+  <kendo-menu>
+    <kendo-menu-item text="Item1">
+      <ng-template kendoMenuItemTemplate let-item="item" let-index="index">
+        <div style="padding: 10px;">
+          My Template for: {{ item.text }} at index: {{ index }}
+        </div>
+      </ng-template>
+      <ng-template kendoMenuItemContentTemplate let-item="item" let-index="index">
+        <div style="padding: 10px;">
+          My Content Template for: {{ item.text }} at index: {{ index }}
+        </div>
+      </ng-template>
+    </kendo-menu-item>
+  </kendo-menu>
+
+  <!-- masked textbox -->
+  <p>Masked TextBox</p>
+  <kendo-maskedtextbox type="text" [(ngModel)]="maskedValue" [mask]="mask">
+  </kendo-maskedtextbox><hr>  
+
+  <!-- bottom navigation -->
+  <div class="example-wrapper">
+    <router-outlet></router-outlet>
+    <kendo-bottomnavigation [items]="bottomArr" positionMode="sticky" [border]=true (select)="onSelect($event)"
+      style="background-color: #ebebeb; color: black;">
+    </kendo-bottomnavigation>
+  </div>

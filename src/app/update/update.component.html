@@ -1,0 +1,81 @@
+<div class="card-body">
+    <div *ngFor="let data of voucherTable let i=index">
+        <h5 class="card-header">Update Voucher</h5>
+        <form name="form" #form="ngForm" (ngSubmit)="form.form.valid && onUpdate(form,data)" form class="row g-3"
+            novalidate>
+
+            <div class="mb-2 row" style="padding-top: 25px;">
+                <label for="no" class="col-sm-2 col-form-label">No. </label>
+                <div class="col-sm-5">
+                    <input type="text" name="no" class="form-control" id="no" [(ngModel)]="data.no"
+                        [ngClass]="{'is-invalid': noHtml.invalid && (noHtml.dirty || noHtml.touched || form.submitted)}"
+                        #noHtml="ngModel" required>
+                    <div *ngIf="noHtml.invalid &&  form.submitted && (noHtml.dirty || noHtml.touched)"
+                        style="color: red;">
+                    </div>
+                </div>
+            </div>
+
+            {{data.no}}
+
+            <div class="mb-2 row" style="padding-top: 25px;">
+                <label for="date" class="col-sm-2 col-form-label">Date </label>
+                <div class="col-sm-5">
+                    <input type="date" name="date" id="date" class="form-control" ngModel [(ngModel)]="data.date"
+                        [ngClass]="{'is-invalid': dateHtml.invalid && (dateHtml.dirty || dateHtml.touched || form.submitted)}"
+                        #dateHtml="ngModel" required>
+                    <div *ngIf="dateHtml.invalid && (dateHtml.dirty || dateHtml.touched)" style="color: red;"></div>
+                </div>
+            </div>
+
+            <div class="mb-2 row" style="padding-top: 25px;">
+                <label for="ms" class="col-sm-2 col-form-label">M/S </label>
+                <div class="col-sm-5">
+                    <input type="text" name="ms" id="ms" class="form-control" ngModel [(ngModel)]="data.ms"
+                        #msHtml="ngModel"
+                        [ngClass]="{'is-invalid': msHtml.invalid && (msHtml.dirty || msHtml.touched || form.submitted)}"
+                        required>
+                    <div *ngIf="msHtml.invalid && (msHtml.dirty || msHtml.touched)" style="color: red;"> </div>
+                </div>
+            </div>
+
+            <div class="mb-2 row" style="padding-top: 25px;">
+                <label for="paidTo" class="col-sm-2 col-form-label">Paid To </label>
+                <div class="col-sm-5">
+                    <input type="text" name="paidTo" id="paidTo" class="form-control" ngModel [(ngModel)]="data.paidTo"
+                        [ngClass]="{'is-invalid': paidToHtml.invalid && (paidToHtml.dirty || paidToHtml.touched || form.submitted)}"
+                        #paidToHtml="ngModel" required>
+                    <div *ngIf="paidToHtml.invalid && (paidToHtml.dirty || paidToHtml.touched)" style="color: red;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-2 row" style="padding-top: 25px;">
+                <label for="debit" class="col-sm-2 col-form-label">Debit </label>
+                <div class="col-sm-5">
+                    <input type="text" name="debit" id="debit" class="form-control" ngModel [(ngModel)]="data.debit"
+                        [ngClass]="{'is-invalid': debitHtml.invalid && (debitHtml.dirty || debitHtml.touched || form.submitted)}"
+                        #debitHtml="ngModel" required>
+                    <div *ngIf="debitHtml.invalid && (debitHtml.dirty || debitHtml.touched)" style="color: red;"></div>
+                </div>
+            </div>
+
+            <div class="mb-2 row" style="padding-top: 25px;">
+                <label for="onAcOf" class="col-sm-2 col-form-label">On A/c Of </label>
+                <div class="col-sm-5">
+                    <input type="text" name="onAcOf" id="onAcOf" class="form-control" ngModel [(ngModel)]="data.onAcOf"
+                        [ngClass]="{'is-invalid': onAcOfHtml.invalid && (onAcOfHtml.dirty || onAcOfHtml.touched || form.submitted)}"
+                        #onAcOfHtml="ngModel" required>
+                    <div *ngIf="onAcOfHtml.invalid && (onAcOfHtml.dirty || onAcOfHtml.touched)" style="color: red;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 col-1" style="margin-left: 5px;">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-danger" routerLink="">Back</button>
+            </div>
+
+        </form>
+    </div>
+</div>

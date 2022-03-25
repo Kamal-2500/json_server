@@ -1,0 +1,27 @@
+.anyClass {
+    height:150px;
+    overflow-y: scroll;
+  }
+  ul {
+    font-size: 14px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+li {
+    margin: 0 9px;
+}
+li:hover {
+  cursor: pointer;
+  color: #D6002F;
+}
+.item {
+	background-color: #bfe7f9;
+	color: #000000;
+	border: 1px solid #fff;
+	height: 70px;
+	line-height: 68px;
+	font-size: 16px;
+	text-align: center;
+}

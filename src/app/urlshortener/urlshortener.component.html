@@ -1,0 +1,27 @@
+<div class="card-body">
+    <h5 class="card-header"> URL Shortener </h5>
+
+    <form name="form" #form="ngForm" (ngSubmit)="form.form.valid && onSubmitForm(form)" form class="row g-3" novalidate>
+        <div class="mb-2 row" style="padding-top: 25px;">
+            <div class="col-sm-5">
+                <input type="url" name="fullURL" class="form-control" id="fullURL" ngModel [(ngModel)]="fullURL"
+                    placeholder="Enter your URL here"
+                    [ngClass]="{'is-invalid': fullURLHtml.invalid && (fullURLHtml.dirty || fullURLHtml.touched || form.submitted )}"
+                    #fullURLHtml="ngModel" required url>
+                <div *ngIf="fullURLHtml.invalid && (fullURLHtml.dirty || fullURLHtml.touched)" style="color:red;">
+                    <div *ngIf="fullURLHtml.errors?.['required']">URL is required.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 col-1" style="margin-left: 5px;">
+            <button type="submit" class="btn btn-primary">Generate URL</button>
+        </div>
+    </form>
+
+    <div class="mb-2 row" style="padding-top: 25px;" *ngIf="isSubmitted">
+        <div class="col-sm-5">
+            <p><a [href]="shortURL" target="blank"> {{shortURL}} </a></p>
+        </div>
+    </div>
+</div>
